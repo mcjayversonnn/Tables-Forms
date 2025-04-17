@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tables & Forms</title>
+    <style>
+        body {
+            font-family: Arial, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #000f20;
+            color: black;
+        }
+        
+        h1 {
+            font-size: 4em;
+            margin-bottom: 50px;
+            color: #EEF4ED;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .invoice-section {
+            width: 48%;
+        }
+        
+        .form-section {
+            width: 48%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse; 
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+        }
+        
+        thead {
+            background-color: #0b4061;
+            color: white;
+        }
+        
+        tbody {
+            background-color: white;
+        }
+        
+        tfoot {
+            background-color: #eaf2f8;
+            font-weight: bold;
+        }
+        
+        .invoice-table {
+            border: 2px solid #1a5276;
+        }
+        
+        .invoice-header {
+            background-color: #1a5276;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .invoice-number {
+            background-color: #2874a6;
+            color: white;
+        }
+        
+        .invoice-number td {
+            padding: 15px;
+        }
+        
+        .invoice-number td:last-child {
+            text-align: right;
+        }
+        
+        .address-table {
+            width: 100%;
+            margin-top: 5px;
+            border: 1px solid #aed6f1;
+        }
+        
+        .address-table td {
+            background-color: #c9e0f2;
+            padding: 15px;
+            vertical-align: top; 
+            border: 1px solid #aed6f1;
+        }
+        
+        .item-table {
+            width: 100%;
+            margin-top: 10px;
+            border: 1px solid #2874a6;
+        }
+        
+        .item-table th {
+            background-color: #3498db;
+            color: white;
+            padding: 12px;
+            text-align: left; 
+            border: 1px solid #2874a6;
+        }
+        
+        .item-table th:nth-child(4),
+        .item-table td:nth-child(4),
+        .item-table .subtotal-row td:last-child,
+        .item-table .tax-row td:last-child,
+        .item-table .grand-total-row td:last-child {
+            text-align: right;
+        }
+        
+        .item-table th:nth-child(2), .item-table th:nth-child(3),
+        .item-table td:nth-child(2), .item-table td:nth-child(3) {
+            text-align: center;
+        }
+        
+        .item-table td {
+            padding: 12px; 
+            border: 1px solid #d6eaf8;
+            background-color: white;
+        }
+        
+        .item-table tbody tr:nth-child(even) td {
+            background-color: #e0eaf5;
+        }
+        
+        .item-table tbody tr:hover td {
+            background-color: #ebf5fb;
+        }
+        
+        .subtotal-row td {
+            font-weight: bold;
+            background-color: #eaf2f8;
+            border-top: 2px solid #aed6f1;
+        }
+        
+        .tax-row td {
+            font-weight: bold;
+            background-color: #eaf2f8;
+        }
+        
+        .grand-total-row td {
+            background-color: #2874a6;
+            color: white;
+            font-weight: bold;
+            padding: 12px;
+            border: 2px solid #1a5276;
+            font-size: 16px;
+        }
+        
+        .form-container {
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background-color: white;
+            overflow: hidden;
+            border: none;
+        }
+        
+        .form-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .form-header {
+            background-color: #1a6556;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-weight: bold;
+        }
+        
+        .form-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e8f8f5; 
+        }
+        
+        input[type=text] {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        
+        input[type=text]:focus {
+            border: 2px solid #1a6556;
+            outline: none;
+        }
+        
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            background-color: white;
+        }
+        
+        textarea {
+            width: 280px;
+            height: 100px;
+            padding: 12px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+        }
+        
+        textarea:focus {
+            border: 2px solid #1a6556;
+            outline: none;
+        }
+        
+        input[type="radio"], input[type="checkbox"] {
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        .submit-button {
+            background-color: #008c70;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            border: none;
+            width: 100%;
+        }
+        
+        .submit-button:hover {
+            background-color: #19b999;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tables & Forms</h1>
+    
+    <div class="container">
+        <div class="invoice-section">
+            <div class="table-responsive">
+                <table class="invoice-table">
+                    <tr>
+                        <td colspan="2" class="invoice-header">Invoice Tabular data</td>
+                    </tr>
+                    <tr class="invoice-number">
+                        <td>Invoice #123456789</td>
+                        <td>14 January 2025</td>
+                    </tr>
+                </table>
+                
+                <table class="address-table">
+                    <tr>
+                        <td width="50%">
+                            <strong>Pay to:</strong><br>
+                            Acme Billing Co.<br>
+                            123 Main St.<br>
+                            Cityville, NA 12345
+                        </td>
+                        <td width="50%">
+                            <strong>Customer:</strong><br>
+                            John Smith<br>
+                            321 Willow Way<br>
+                            Southeast Northwestshire, MA 54321
+                        </td>
+                    </tr>
+                </table>
+                
+                <table class="item-table">
+                    <colgroup>
+                        <col style="width: 50%;">
+                        <col style="width: 15%;">
+                        <col style="width: 15%;">
+                        <col style="width: 20%;">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Name / Description</th>
+                            <th>Qty.</th>
+                            <th>@</th>
+                            <th class="right-align">Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Paperclips</td>
+                            <td>1000</td>
+                            <td>0.01</td>
+                            <td class="right-align">10.00</td>
+                        </tr>
+                        <tr>
+                            <td>Staples (box)</td>
+                            <td>100</td>
+                            <td>1.00</td>
+                            <td class="right-align">100.00</td>
+                        </tr>
+                        <tr>
+                            <td>Bond Paper (box)</td>
+                            <td>100</td>
+                            <td>1.00</td>
+                            <td class="right-align">110.00</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="subtotal-row">
+                            <td colspan="3">Subtotal</td>
+                            <td class="right-align">110.00</td>
+                        </tr>
+                        <tr class="tax-row">
+                            <td colspan="2">Tax</td>
+                            <td>8%</td>
+                            <td class="right-align">8.80</td>
+                        </tr>
+                        <tr class="grand-total-row">
+                            <td colspan="3">Grand Total</td>
+                            <td class="right-align">$ 118.80</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        
+        <div class="form-section">
+            <div class="form-container">
+                <table class="form-table">
+                    <thead>
+                        <tr>
+                            <td colspan="2" class="form-header">Name</td>
+                            <td class="form-header">Value</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="2">Name:</td>
+                            <td>
+                                <input type="text" placeholder="Type your name here">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Sex:</td>
+                            <td>
+                                <input type="radio" name="sex" id="male" checked> <label for="male">Male</label><br>
+                                <input type="radio" name="sex" id="female"> <label for="female">Female</label><br>
+                                <input type="radio" name="sex" id="other"> <label for="other">Other</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Eye Color</td>
+                            <td>
+                                <select>
+                                    <option value="black">Black</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="brown">Brown</option>
+                                    <option value="green">Green</option>
+                                    <option value="hazel">Hazel</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Check all that Applies</td>
+                            <td>
+                                <input type="checkbox" id="tall"> <label for="tall">Over 6ft. Tall</label><br>
+                                <input type="checkbox" id="heavy"> <label for="heavy">Over 200 pounds</label><br>
+                                <input type="checkbox" id="light"> <label for="light">Less than 200 pounds</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Describe your athletic ability</td>
+                            <td>
+                                <textarea></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <button class="submit-button">Enter my Information</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
